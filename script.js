@@ -1,12 +1,18 @@
-let https = 'https://hexarate.paikama.co/api/rates/USD/GBP/latest';
+async function atvaltas(){
 
-fetch(url)
-    .then(response => {
-        if(!response.ok){
-            throw new Error("HIBA");
-        }
-        return response.json();
-    })
-    .then(json => {
-        
-    })
+    let amount = document.getElementById("amount").value;
+    let currency = document.getElementById("currency").value;
+    
+    const url = `https://hexarate.paikama.co/api/rates/latest/HUF?target=${currency}`;
+    
+    let response = await fetch(url);
+    let data = await response.json();
+    
+    let range = data.data.mid;
+    
+    let result = amount * range;
+    
+    document.getElementById("result").innerText =
+    `${amount} HUF = ${result.toFixed(2)} ${currency}`;
+    
+    }
